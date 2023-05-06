@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -27,11 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.example.moneymanager.R
 import com.example.moneymanager.components.MainHomeMenu
 import com.example.moneymanager.components.MainHomeUserImage
-import com.example.moneymanager.ui.theme.AliceBlue
-import com.example.moneymanager.ui.theme.AliceBlue1
-import com.example.moneymanager.ui.theme.Archivo
-import com.example.moneymanager.ui.theme.DavysGrey
-import com.example.moneymanager.ui.theme.SpanishGray
+import com.example.moneymanager.ui.theme.*
 
 
 @Composable
@@ -84,6 +82,58 @@ fun HomeScreen() {
                 value = "",
                 onValueChange = {},
             )
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(150.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(CaribbeanGreen)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .offset(x = 50.dp, y = (-40).dp)
+                        .size(100.dp)
+                        .background(White15, CircleShape)
+                )
+                Box(
+                    modifier = Modifier
+                        .offset(x = 100.dp)
+                        .size(100.dp)
+                        .background(White15, CircleShape)
+                )
+                Box(
+                    modifier = Modifier
+                        .offset(x = 10.dp, y = 40.dp)
+                        .size(100.dp)
+                ) {
+                    Column() {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(40.dp)
+                                .background(Color.White, CircleShape)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .size(30.dp)
+                                    .background(CaribbeanGreen, CircleShape)
+                            ) {
+                                Image(painter = painterResource(id = R.drawable.baseline_attach_money_24), contentDescription = "")
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(text = "Transactions", fontSize = 15.sp, color = White80)
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(text = "7 items", fontSize = 9.sp, color = White80)
+                    }
+                }
+            }
         }
     }
 }
