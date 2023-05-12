@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -27,14 +30,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moneymanager.R
+import com.example.moneymanager.components.HomeBannerButtons
 import com.example.moneymanager.components.MainHomeMenu
 import com.example.moneymanager.components.MainHomeUserImage
+import com.example.moneymanager.components.SearchTextField
 import com.example.moneymanager.ui.theme.*
 
 
 @Composable
 fun HomeScreen() {
-    Column() {
+    Column {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -55,83 +60,63 @@ fun HomeScreen() {
             Text(text = "Creative Mints", fontSize = 26.sp, fontFamily = Archivo, fontWeight = FontWeight.Medium)
         }
         Spacer(modifier = Modifier.height(30.dp))
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            TextField(
-                leadingIcon = {
-                    Image(
-                        painter = painterResource(id = R.drawable.baseline_search_24),
-                        contentDescription = ""
-                    )
-                },
-                colors = TextFieldDefaults.textFieldColors(
-                    focusedIndicatorColor = Color.Transparent,
-                    focusedLabelColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    backgroundColor = Color.Transparent
-
-                ),
-                label = {Text("Search", fontSize = 13.sp, color = SpanishGray, fontFamily = Archivo, fontWeight = FontWeight.Normal, modifier = Modifier.offset(y = 3.dp))},
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .fillMaxWidth(0.8f)
-                    .background(AliceBlue1)
-                    .height(60.dp),
-                value = "",
-                onValueChange = {},
-            )
-        }
+        SearchTextField()
         Spacer(modifier = Modifier.height(20.dp))
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(
+                start = 12.dp,
+                top = 16.dp,
+                end = 12.dp,
+                bottom = 16.dp
+            ),
+            horizontalArrangement = Arrangement.Center,
         ) {
-            Box(
-                modifier = Modifier
-                    .size(150.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(CaribbeanGreen)
-            ) {
+           item {
+               Box(
+                   contentAlignment = Alignment.Center,
+               ) {
+                   HomeBannerButtons(
+                       nameBanner = "Transcation",
+                       noItems = 7,
+                       colorBanner = CaribbeanGreen ,
+                       bannerIcon = R.drawable.baseline_attach_money_24
+                   )
+               }
+           }
+            item {
                 Box(
-                    modifier = Modifier
-                        .offset(x = 50.dp, y = (-40).dp)
-                        .size(100.dp)
-                        .background(White15, CircleShape)
-                )
-                Box(
-                    modifier = Modifier
-                        .offset(x = 100.dp)
-                        .size(100.dp)
-                        .background(White15, CircleShape)
-                )
-                Box(
-                    modifier = Modifier
-                        .offset(x = 10.dp, y = 40.dp)
-                        .size(100.dp)
                 ) {
-                    Column() {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .size(40.dp)
-                                .background(Color.White, CircleShape)
-                        ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .size(30.dp)
-                                    .background(CaribbeanGreen, CircleShape)
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.baseline_attach_money_24), contentDescription = "")
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = "Transactions", fontSize = 15.sp, color = White80)
-                        Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = "7 items", fontSize = 9.sp, color = White80)
-                    }
+                    HomeBannerButtons(
+                        nameBanner = "Buggets",
+                        noItems = 7,
+                        colorBanner = Crayola ,
+                        bannerIcon = R.drawable.piggy_bank
+                    )
+                }
+            }
+            item {
+                Box(
+                    contentAlignment = Alignment.Center,
+                ) {
+                    HomeBannerButtons(
+                        nameBanner = "Recomendations",
+                        noItems = 7,
+                        colorBanner = MaximumYellowRed ,
+                        bannerIcon = R.drawable.baseline_star_border_24
+                    )
+                }
+            }
+
+            item {
+                Box(
+                ) {
+                    HomeBannerButtons(
+                        nameBanner = "Credit Card",
+                        noItems = 7,
+                        colorBanner = PalatinateBlue ,
+                        bannerIcon = R.drawable.purchase
+                    )
                 }
             }
         }
