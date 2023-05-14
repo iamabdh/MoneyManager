@@ -40,6 +40,7 @@ import com.example.moneymanager.components.HomeBannerButtons
 import com.example.moneymanager.components.MainHomeMenu
 import com.example.moneymanager.components.MainHomeUserImage
 import com.example.moneymanager.components.SearchTextField
+import com.example.moneymanager.components.ServicesBannerHome
 import com.example.moneymanager.ui.theme.*
 
 
@@ -61,7 +62,7 @@ fun HomeScreen() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 50.dp, top = 40.dp)
+                .padding(start = 50.dp, top = 30.dp)
         ) {
             Text(text = "Welcome Back", fontSize = 22.sp, fontFamily = Archivo, color = DavysGrey)
             Spacer(modifier = Modifier.height(3.dp))
@@ -115,7 +116,35 @@ fun HomeScreen() {
                         )
             }
         }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 50.dp)
+        ) {
+            Text(
+                text = "Choose a categories",
+                fontSize = 20.sp,
+                fontFamily = Archivo,
+                fontWeight = FontWeight.Medium
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                ServicesBannerHome(
+                    t1 = "Branch",
+                    t2 = "Service",
+                    colorBanner = SkyBlue,
+                    iconBanner = R.drawable.baseline_account_balance_24
+                )
+                ServicesBannerHome(
+                    t1 = "Make a",
+                    t2 = "Payment",
+                    colorBanner = UltramarineBlue,
+                    iconBanner = R.drawable.credit_card__1
+                )
+            }
+        }
         Spacer(modifier = Modifier.height(20.dp))
-
     }
 }

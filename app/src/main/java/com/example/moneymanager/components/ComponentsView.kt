@@ -3,6 +3,7 @@ package com.example.moneymanager.components
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,9 @@ import com.example.moneymanager.R
 import com.example.moneymanager.ui.theme.AliceBlue
 import com.example.moneymanager.ui.theme.AliceBlue1
 import com.example.moneymanager.ui.theme.Archivo
+import com.example.moneymanager.ui.theme.BrightGray
 import com.example.moneymanager.ui.theme.CaribbeanGreen
+import com.example.moneymanager.ui.theme.SkyBlue
 import com.example.moneymanager.ui.theme.SpanishGray
 import com.example.moneymanager.ui.theme.White15
 import com.example.moneymanager.ui.theme.White80
@@ -134,13 +137,13 @@ fun HomeBannerButtons(
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(45.dp)
                         .background(Color.White, CircleShape)
                 ) {
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .size(30.dp)
+                            .size(35.dp)
                             .background(colorBanner, CircleShape)
                     ) {
                         Image(painter = painterResource(id = bannerIcon), contentDescription = "")
@@ -150,6 +153,53 @@ fun HomeBannerButtons(
                 Text(text = nameBanner, fontSize = 10.sp, color = White80)
                 Spacer(modifier = Modifier.height(5.dp))
                 Text(text = "$noItems items", fontSize = 9.sp, color = White80)
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ServicesBannerHome(
+    t1: String,
+    t2: String,
+    colorBanner: Color,
+    iconBanner: Int,
+) {
+    Box(
+        modifier = Modifier
+            .border(1.dp, shape = RoundedCornerShape(20.dp), color = BrightGray)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp)
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(shape = CircleShape)
+                    .background(colorBanner)
+            ) {
+                Icon(
+                    tint = Color.White,
+                    painter = painterResource(id = iconBanner),
+                    contentDescription = "")
+            }
+            Column(
+                modifier = Modifier.padding(end = 30.dp)
+            ) {
+                Text(
+                    text = t1,
+                    fontSize = 15.sp,
+                    fontFamily = Archivo
+                )
+                Text(
+                    text = t2,
+                    fontSize = 15.sp,
+                    fontFamily = Archivo,
+                    modifier = Modifier.offset(y= (-5).dp)
+                )
             }
         }
     }
