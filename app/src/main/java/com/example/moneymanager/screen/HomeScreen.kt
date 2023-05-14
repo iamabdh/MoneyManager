@@ -89,34 +89,37 @@ fun HomeScreen(
                 modifier = Modifier.padding(10.dp)
             ) {
                 HomeBannerButtons(
-                            nameBanner = "Transcation",
+                            nameBanner = "Transaction",
                             noItems = 7,
                             colorBanner = CaribbeanGreen,
                             bannerIcon = R.drawable.baseline_attach_money_24
-                        )
+                        ){
+                    navController.navigate("transaction_screen")
+                }
                 HomeBannerButtons(
-                            nameBanner = "Recomendations",
+                            nameBanner = "Recommendation",
                             noItems = 7,
                             colorBanner = MaximumYellowRed,
-                            bannerIcon = R.drawable.baseline_star_border_24
-                        )
+                            bannerIcon = R.drawable.baseline_star_border_24,
+                            nameFontSize = 12.sp
+                        ){}
             }
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 modifier = Modifier.padding(10.dp)
             ) {
                 HomeBannerButtons(
-                            nameBanner = "Buggets",
+                            nameBanner = "Budgets",
                             noItems = 7,
                             colorBanner = Crayola,
                             bannerIcon = R.drawable.piggy_bank
-                        )
+                        ){}
                 HomeBannerButtons(
                             nameBanner = "Credit Card",
                             noItems = 7,
                             colorBanner = PalatinateBlue,
                             bannerIcon = R.drawable.purchase
-                        )
+                        ){}
             }
         }
         Column(

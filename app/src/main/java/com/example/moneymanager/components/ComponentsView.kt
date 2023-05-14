@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -25,6 +27,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moneymanager.R
@@ -33,10 +37,13 @@ import com.example.moneymanager.ui.theme.AliceBlue1
 import com.example.moneymanager.ui.theme.Archivo
 import com.example.moneymanager.ui.theme.BrightGray
 import com.example.moneymanager.ui.theme.CaribbeanGreen
+import com.example.moneymanager.ui.theme.Diamond
+import com.example.moneymanager.ui.theme.Ming
 import com.example.moneymanager.ui.theme.SkyBlue
 import com.example.moneymanager.ui.theme.SpanishGray
 import com.example.moneymanager.ui.theme.White15
 import com.example.moneymanager.ui.theme.White80
+import org.w3c.dom.Text
 
 @Composable
 fun MainHomeMenu() {
@@ -107,9 +114,11 @@ fun SearchTextField() {
 @Composable
 fun HomeBannerButtons(
     nameBanner: String,
+    nameFontSize: TextUnit = 15.sp,
     noItems: Int,
     colorBanner: Color,
-    bannerIcon: Int
+    bannerIcon: Int,
+    onClickGoTo: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -117,7 +126,7 @@ fun HomeBannerButtons(
             .clip(RoundedCornerShape(20.dp))
             .background(colorBanner)
             .clickable {
-
+                onClickGoTo()
             }
     ) {
         Box(
@@ -154,7 +163,7 @@ fun HomeBannerButtons(
                     }
                 }
                 Spacer(modifier = Modifier.height(5.dp))
-                Text(text = nameBanner, fontSize = 10.sp, color = White80)
+                Text(text = nameBanner, fontSize = nameFontSize, color = White80)
                 Spacer(modifier = Modifier.height(5.dp))
                 Text(text = "$noItems items", fontSize = 9.sp, color = White80)
             }
@@ -174,7 +183,7 @@ fun ServicesBannerHome(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(20.dp))
             .border(1.dp, shape = RoundedCornerShape(20.dp), color = BrightGray)
-            .clickable {  }
+            .clickable { }
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(5.dp),
@@ -207,6 +216,50 @@ fun ServicesBannerHome(
                     modifier = Modifier.offset(y= (-5).dp)
                 )
             }
+        }
+    }
+}
+
+
+@Composable
+fun TransactionBanner(
+    imageBanner: Int,
+    amount: Float,
+    colorBanner: Color,
+    nameBanner: String
+) {
+    Box(
+        modifier = Modifier
+            .width(155.dp)
+            .height(170.dp)
+            .clip(shape = RoundedCornerShape(20.dp))
+            .background(colorBanner)
+            .clickable {  }
+    ) {
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 20.dp, top = 30.dp, bottom = 20.dp)
+        ) {
+            Image(
+                painter = painterResource(id = imageBanner),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(62.dp)
+            )
+            Text(
+                text = "$ $amount",
+                fontSize = 20.sp,
+                fontFamily = Archivo,
+                color = Color.Black
+            )
+            Text(
+                text = nameBanner,
+                fontSize = 15.sp,
+                fontFamily = Archivo,
+                color = Ming
+            )
         }
     }
 }
