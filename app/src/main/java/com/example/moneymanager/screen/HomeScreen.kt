@@ -72,9 +72,11 @@ fun HomeScreen() {
             ),
             horizontalArrangement = Arrangement.Center,
         ) {
+
            item {
                Box(
-                   contentAlignment = Alignment.Center,
+                   contentAlignment = Alignment.BottomEnd,
+                   modifier = Modifier.padding(10.dp)
                ) {
                    HomeBannerButtons(
                        nameBanner = "Transcation",
@@ -86,6 +88,7 @@ fun HomeScreen() {
            }
             item {
                 Box(
+                    modifier = Modifier.padding(10.dp)
                 ) {
                     HomeBannerButtons(
                         nameBanner = "Buggets",
@@ -97,7 +100,8 @@ fun HomeScreen() {
             }
             item {
                 Box(
-                    contentAlignment = Alignment.Center,
+                    contentAlignment = Alignment.BottomEnd,
+                    modifier = Modifier.padding(10.dp)
                 ) {
                     HomeBannerButtons(
                         nameBanner = "Recomendations",
@@ -110,6 +114,7 @@ fun HomeScreen() {
 
             item {
                 Box(
+                    modifier = Modifier.padding(10.dp)
                 ) {
                     HomeBannerButtons(
                         nameBanner = "Credit Card",
