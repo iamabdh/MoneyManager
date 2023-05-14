@@ -3,22 +3,28 @@ package com.example.moneymanager.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,7 +45,9 @@ import com.example.moneymanager.ui.theme.*
 
 @Composable
 fun HomeScreen() {
-    Column {
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -57,73 +65,57 @@ fun HomeScreen() {
         ) {
             Text(text = "Welcome Back", fontSize = 22.sp, fontFamily = Archivo, color = DavysGrey)
             Spacer(modifier = Modifier.height(3.dp))
-            Text(text = "Creative Mints", fontSize = 26.sp, fontFamily = Archivo, fontWeight = FontWeight.Medium)
+            Text(
+                text = "Creative Mints",
+                fontSize = 26.sp,
+                fontFamily = Archivo,
+                fontWeight = FontWeight.Medium
+            )
         }
         Spacer(modifier = Modifier.height(30.dp))
         SearchTextField()
         Spacer(modifier = Modifier.height(20.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(
-                start = 12.dp,
-                top = 16.dp,
-                end = 12.dp,
-                bottom = 16.dp
-            ),
+
+        Row(
             horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
         ) {
-
-           item {
-               Box(
-                   contentAlignment = Alignment.BottomEnd,
-                   modifier = Modifier.padding(10.dp)
-               ) {
-                   HomeBannerButtons(
-                       nameBanner = "Transcation",
-                       noItems = 7,
-                       colorBanner = CaribbeanGreen ,
-                       bannerIcon = R.drawable.baseline_attach_money_24
-                   )
-               }
-           }
-            item {
-                Box(
-                    modifier = Modifier.padding(10.dp)
-                ) {
-                    HomeBannerButtons(
-                        nameBanner = "Buggets",
-                        noItems = 7,
-                        colorBanner = Crayola ,
-                        bannerIcon = R.drawable.piggy_bank
-                    )
-                }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.padding(10.dp)
+            ) {
+                HomeBannerButtons(
+                            nameBanner = "Transcation",
+                            noItems = 7,
+                            colorBanner = CaribbeanGreen,
+                            bannerIcon = R.drawable.baseline_attach_money_24
+                        )
+                HomeBannerButtons(
+                            nameBanner = "Recomendations",
+                            noItems = 7,
+                            colorBanner = MaximumYellowRed,
+                            bannerIcon = R.drawable.baseline_star_border_24
+                        )
             }
-            item {
-                Box(
-                    contentAlignment = Alignment.BottomEnd,
-                    modifier = Modifier.padding(10.dp)
-                ) {
-                    HomeBannerButtons(
-                        nameBanner = "Recomendations",
-                        noItems = 7,
-                        colorBanner = MaximumYellowRed ,
-                        bannerIcon = R.drawable.baseline_star_border_24
-                    )
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier.padding(10.dp)
-                ) {
-                    HomeBannerButtons(
-                        nameBanner = "Credit Card",
-                        noItems = 7,
-                        colorBanner = PalatinateBlue ,
-                        bannerIcon = R.drawable.purchase
-                    )
-                }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.padding(10.dp)
+            ) {
+                HomeBannerButtons(
+                            nameBanner = "Buggets",
+                            noItems = 7,
+                            colorBanner = Crayola,
+                            bannerIcon = R.drawable.piggy_bank
+                        )
+                HomeBannerButtons(
+                            nameBanner = "Credit Card",
+                            noItems = 7,
+                            colorBanner = PalatinateBlue,
+                            bannerIcon = R.drawable.purchase
+                        )
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
+
     }
 }
