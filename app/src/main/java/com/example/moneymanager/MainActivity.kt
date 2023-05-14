@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.moneymanager.components.MainHomeUserImage
+import com.example.moneymanager.navigation.Navigation
 import com.example.moneymanager.screen.HomeScreen
 import com.example.moneymanager.ui.theme.MoneyManagerTheme
 
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MoneyManagerTheme {
-                HomeScreen()
+                Navigation()
             }
         }
     }

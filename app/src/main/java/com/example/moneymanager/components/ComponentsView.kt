@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -115,6 +116,9 @@ fun HomeBannerButtons(
             .size(150.dp)
             .clip(RoundedCornerShape(20.dp))
             .background(colorBanner)
+            .clickable {
+
+            }
     ) {
         Box(
             modifier = Modifier
@@ -168,7 +172,9 @@ fun ServicesBannerHome(
 ) {
     Box(
         modifier = Modifier
+            .clip(shape = RoundedCornerShape(20.dp))
             .border(1.dp, shape = RoundedCornerShape(20.dp), color = BrightGray)
+            .clickable {  }
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(5.dp),

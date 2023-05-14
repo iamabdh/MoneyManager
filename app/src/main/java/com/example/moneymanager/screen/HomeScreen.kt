@@ -35,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.moneymanager.R
 import com.example.moneymanager.components.HomeBannerButtons
 import com.example.moneymanager.components.MainHomeMenu
@@ -45,7 +46,9 @@ import com.example.moneymanager.ui.theme.*
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController
+) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
