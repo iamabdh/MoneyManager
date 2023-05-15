@@ -38,16 +38,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.moneymanager.R
 import com.example.moneymanager.components.TransactionBanner
+import com.example.moneymanager.components.TransactionItemView
 import com.example.moneymanager.ui.theme.AliceBlue
 import com.example.moneymanager.ui.theme.AntiqueWhite
 import com.example.moneymanager.ui.theme.Archivo
 import com.example.moneymanager.ui.theme.CaribbeanGreen
 import com.example.moneymanager.ui.theme.CelticBlue
+import com.example.moneymanager.ui.theme.Crayola
 import com.example.moneymanager.ui.theme.Diamond
 import com.example.moneymanager.ui.theme.LightCobaltBlue
 import com.example.moneymanager.ui.theme.Ming
 import com.example.moneymanager.ui.theme.PalatinateBlue
 import com.example.moneymanager.ui.theme.RocketMetallic
+import com.example.moneymanager.ui.theme.TiffanyBlue
 import kotlin.math.roundToInt
 
 
@@ -187,52 +190,37 @@ fun TransactionScreen(
                    }
                    Spacer(modifier = Modifier.height(20.dp))
 
-                   Column() {
-                       Row(
-                           horizontalArrangement = Arrangement.SpaceBetween,
-                           verticalAlignment = Alignment.CenterVertically,
-                           modifier = Modifier
-                               .fillMaxWidth()
-                       ) {
-                           Box(
-                               contentAlignment = Alignment.Center,
-                               modifier = Modifier
-                                   .size(50.dp)
-                                   .clip(shape = CircleShape)
-                                   .background(CaribbeanGreen)
-                           ) {
-                               Icon(
-                                   tint = Color.White,
-                                   painter = painterResource(id = R.drawable.baseline_directions_car_filled_24),
-                                   contentDescription = "",
-                                   modifier = Modifier.size(30.dp)
-                               )
-                           }
-                           Column(
-                               modifier = Modifier
-                                   .weight(0.1f)
-                                   .padding(10.dp)
-                           ) {
-                               Text(
-                                   text = "Car Purchase",
-                                   fontSize = 16.sp,
-                                   fontFamily = Archivo,
-                                   color = Color.Black,
-                               )
-                               Text(
-                                   text = "Auto Loan",
-                                   fontSize = 12.sp,
-                                   fontFamily = Archivo,
-                                   color = RocketMetallic,
-                               )
-                           }
-                           Text(
-                               text = "-$250",
-                               fontSize = 15.sp,
-                               fontFamily = Archivo,
-                               color = Color.Black
-                           )
-                       }
+                   Column(
+                       verticalArrangement = Arrangement.spacedBy(5.dp)
+                   ) {
+                       TransactionItemView(
+                           iconItem = R.drawable.baseline_directions_car_filled_24,
+                           iconColor = CaribbeanGreen,
+                           itemTypeName = "Car Purchase",
+                           itemListTransaction = "Auto Loan" ,
+                           itemTransactionAmount = 250,
+                       )
+                       TransactionItemView(
+                           iconItem = R.drawable.baseline_home_24,
+                           iconColor = PalatinateBlue,
+                           itemTypeName = "House Purchase",
+                           itemListTransaction = "Airbnb Home" ,
+                           itemTransactionAmount = 250,
+                       )
+                       TransactionItemView(
+                           iconItem = R.drawable.baseline_local_florist_24,
+                           iconColor = Crayola,
+                           itemTypeName = "Transport",
+                           itemListTransaction = "Uber, Gas" ,
+                           itemTransactionAmount = 250,
+                       )
+                       TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
                    }
                }
             }

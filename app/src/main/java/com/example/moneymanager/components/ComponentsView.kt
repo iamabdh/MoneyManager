@@ -39,6 +39,7 @@ import com.example.moneymanager.ui.theme.BrightGray
 import com.example.moneymanager.ui.theme.CaribbeanGreen
 import com.example.moneymanager.ui.theme.Diamond
 import com.example.moneymanager.ui.theme.Ming
+import com.example.moneymanager.ui.theme.RocketMetallic
 import com.example.moneymanager.ui.theme.SkyBlue
 import com.example.moneymanager.ui.theme.SpanishGray
 import com.example.moneymanager.ui.theme.White15
@@ -234,7 +235,7 @@ fun TransactionBanner(
             .height(170.dp)
             .clip(shape = RoundedCornerShape(20.dp))
             .background(colorBanner)
-            .clickable {  }
+            .clickable { }
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
@@ -261,5 +262,61 @@ fun TransactionBanner(
                 color = Ming
             )
         }
+    }
+}
+
+
+@Composable
+fun TransactionItemView(
+    iconItem: Int,
+    iconColor: Color,
+    itemTypeName: String,
+    itemListTransaction: String,
+    itemTransactionAmount: Int,
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(50.dp)
+                .clip(shape = CircleShape)
+                .background(iconColor)
+        ) {
+            Icon(
+                tint = Color.White,
+                painter = painterResource(id = iconItem),
+                contentDescription = "",
+                modifier = Modifier.size(30.dp)
+            )
+        }
+        Column(
+            modifier = Modifier
+                .weight(0.1f)
+                .padding(10.dp)
+        ) {
+            Text(
+                text = itemTypeName,
+                fontSize = 16.sp,
+                fontFamily = Archivo,
+                color = Color.Black,
+            )
+            Text(
+                text = itemListTransaction,
+                fontSize = 12.sp,
+                fontFamily = Archivo,
+                color = RocketMetallic,
+            )
+        }
+        Text(
+            text = "$$itemTransactionAmount",
+            fontSize = 15.sp,
+            fontFamily = Archivo,
+            color = Color.Black
+        )
     }
 }
