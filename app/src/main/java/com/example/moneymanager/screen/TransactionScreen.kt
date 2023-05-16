@@ -3,6 +3,7 @@ package com.example.moneymanager.screen
 import android.media.RouteDiscoveryPreference
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +31,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -68,8 +75,19 @@ fun TransactionScreen(
     val swipeableState = rememberSwipeableState(initialValue = States.COLLAPSE)
     val offset = 1.dp
     val sizePx = with(LocalDensity.current){offset.toPx()}
-    val anchors = mapOf(sizePx to States.COLLAPSE, -600f to States.EXPAND)
+    val anchors = mapOf(sizePx to States.COLLAPSE, -800f to States.EXPAND)
 
+    var value by remember { mutableStateOf(swipeableState.offset.value) }
+
+    DisposableEffect(value) {
+        // Called when the composable is initially displayed and every time the value changes
+        println("Value changed: $value")
+
+        onDispose {
+            // Called when the composable is removed from the composition
+            println("Disposed")
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -143,9 +161,9 @@ fun TransactionScreen(
 
         Box(
             modifier = Modifier
-                .offset {
-                    IntOffset(0, swipeableState.offset.value.roundToInt())
-                }
+//                .offset {
+//                    IntOffset(0, swipeableState.offset.value.roundToInt())
+//                }
                 .swipeable(
                     state = swipeableState,
                     orientation = Orientation.Vertical,
@@ -153,6 +171,7 @@ fun TransactionScreen(
                     thresholds = { _, _ ->
                         FractionalThreshold(10f)
                     },
+
                     velocityThreshold = 40.dp
                 )
         ) {
@@ -185,13 +204,15 @@ fun TransactionScreen(
                            modifier = Modifier
                                .clip(shape = RoundedCornerShape(10.dp))
                                .background(AliceBlue)
+                               .clickable {  }
                        ) {
                            Text(
                                text = "See All",
                                fontSize = 15.sp,
                                fontFamily = Archivo,
                                color = CelticBlue,
-                               modifier = Modifier.padding(horizontal = 5.dp, vertical = 5.dp)
+                               modifier = Modifier
+                                   .padding(horizontal = 5.dp, vertical = 5.dp)
                            )
                        }
                    }
