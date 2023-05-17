@@ -1,6 +1,7 @@
 package com.example.moneymanager.screen
 
 import android.media.RouteDiscoveryPreference
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,10 +33,12 @@ import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,6 +64,7 @@ import com.example.moneymanager.ui.theme.Ming
 import com.example.moneymanager.ui.theme.PalatinateBlue
 import com.example.moneymanager.ui.theme.RocketMetallic
 import com.example.moneymanager.ui.theme.TiffanyBlue
+import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 
@@ -72,21 +76,19 @@ enum class States {
 fun TransactionScreen(
     navController: NavController
 ) {
-    val swipeableState = rememberSwipeableState(initialValue = States.COLLAPSE)
-    val offset = 1.dp
-    val sizePx = with(LocalDensity.current){offset.toPx()}
-    val anchors = mapOf(sizePx to States.COLLAPSE, -800f to States.EXPAND)
+    val scrollState = rememberScrollState()
+    var expanded by remember { mutableStateOf(false) }
 
-    var value by remember { mutableStateOf(swipeableState.offset.value) }
+    val expandHeight by animateDpAsState(targetValue = if (expanded) 600.dp else 300.dp)
 
-    DisposableEffect(value) {
-        // Called when the composable is initially displayed and every time the value changes
-        println("Value changed: $value")
+    LaunchedEffect(scrollState) {
+        snapshotFlow { scrollState.value }
+            .collect { value ->
+                delay(200)
+                expanded = value > 0
+                println(expandHeight)
 
-        onDispose {
-            // Called when the composable is removed from the composition
-            println("Disposed")
-        }
+            }
     }
     Column(
         modifier = Modifier
@@ -160,32 +162,19 @@ fun TransactionScreen(
         Spacer(modifier = Modifier.height(30.dp))
 
         Box(
-            modifier = Modifier
-//                .offset {
-//                    IntOffset(0, swipeableState.offset.value.roundToInt())
-//                }
-                .swipeable(
-                    state = swipeableState,
-                    orientation = Orientation.Vertical,
-                    anchors = anchors,
-                    thresholds = { _, _ ->
-                        FractionalThreshold(10f)
-                    },
-
-                    velocityThreshold = 40.dp
-                )
+            Modifier.height(expandHeight)
         ) {
             Card(
                 backgroundColor = Color.White,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .clip(shape = RoundedCornerShape(20.dp))
             ) {
                Column(
                    modifier = Modifier
                        .fillMaxSize()
                        .padding(30.dp)
-                       .verticalScroll(rememberScrollState())
+                       .verticalScroll(scrollState)
                ) {
                    Row(
                        horizontalArrangement = Arrangement.SpaceBetween,
@@ -204,7 +193,7 @@ fun TransactionScreen(
                            modifier = Modifier
                                .clip(shape = RoundedCornerShape(10.dp))
                                .background(AliceBlue)
-                               .clickable {  }
+                               .clickable { expanded = !expanded }
                        ) {
                            Text(
                                text = "See All",
