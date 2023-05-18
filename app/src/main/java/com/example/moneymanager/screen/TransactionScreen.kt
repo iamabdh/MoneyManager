@@ -79,12 +79,11 @@ fun TransactionScreen(
     val scrollState = rememberScrollState()
     var expanded by remember { mutableStateOf(false) }
 
-    val expandHeight by animateDpAsState(targetValue = if (expanded) 600.dp else 300.dp)
+    val expandHeight by animateDpAsState(targetValue = if (expanded) 100.dp else 40.dp)
 
     LaunchedEffect(scrollState) {
         snapshotFlow { scrollState.value }
             .collect { value ->
-                delay(200)
                 expanded = value > 0
                 println(expandHeight)
 
@@ -162,13 +161,14 @@ fun TransactionScreen(
         Spacer(modifier = Modifier.height(30.dp))
 
         Box(
-            Modifier.height(expandHeight)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(expandHeight)
+                .clip(shape = RoundedCornerShape(20.dp))
+                .background(Color.White)
         ) {
-            Card(
-                backgroundColor = Color.White,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(shape = RoundedCornerShape(20.dp))
+            Box(
+
             ) {
                Column(
                    modifier = Modifier
