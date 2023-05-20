@@ -4,6 +4,7 @@ import android.media.RouteDiscoveryPreference
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
@@ -79,17 +80,16 @@ fun TransactionScreen(
     val scrollState = rememberScrollState()
     var expanded by remember { mutableStateOf(false) }
 
-    val expandHeight by animateDpAsState(targetValue = if (expanded) 100.dp else 40.dp)
+    val expandHeight by animateDpAsState(targetValue = if (expanded) 600.dp else 250.dp)
 
     LaunchedEffect(scrollState) {
         snapshotFlow { scrollState.value }
             .collect { value ->
-                expanded = value > 0
-                println(expandHeight)
-
+                delay(200)
+                expanded = value > 1
             }
     }
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(PalatinateBlue)
@@ -161,14 +161,15 @@ fun TransactionScreen(
         Spacer(modifier = Modifier.height(30.dp))
 
         Box(
+            contentAlignment = Alignment.BottomCenter,
             modifier = Modifier
-                .fillMaxWidth()
-                .height(expandHeight)
-                .clip(shape = RoundedCornerShape(20.dp))
-                .background(Color.White)
+                .fillMaxSize()
         ) {
             Box(
-
+                modifier = Modifier
+                    .height(expandHeight)
+                    .clip(shape = RoundedCornerShape(20.dp))
+                    .background(Color.White)
             ) {
                Column(
                    modifier = Modifier
