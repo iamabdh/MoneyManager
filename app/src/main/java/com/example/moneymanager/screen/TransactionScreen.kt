@@ -85,7 +85,9 @@ fun TransactionScreen(
     LaunchedEffect(scrollState) {
         snapshotFlow { scrollState.value }
             .collect { value ->
-                delay(200)
+//                if (expanded) {
+//                    delay(1000)
+//                }
                 expanded = value > 1
             }
     }
@@ -239,6 +241,70 @@ fun TransactionScreen(
                            itemListTransaction = "Wish, Apple" ,
                            itemTransactionAmount = 250,
                        )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+                        TransactionItemView(
+                           iconItem = R.drawable.baseline_shopping_bag_24,
+                           iconColor = TiffanyBlue,
+                           itemTypeName = "Shopping",
+                           itemListTransaction = "Wish, Apple" ,
+                           itemTransactionAmount = 250,
+                       )
+
                    }
                }
             }
